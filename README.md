@@ -9,3 +9,5 @@ The experimental docker buildx plugin can [do mutli-arch builds easily](https://
 This image downloads the correct tarball for the various architectures that and creates images for the architectures that buildx supports. That's all. I can then refer to `rakheshster/alpine-s6:3.12-2.0.0.1` for instance in my Dockerfile to create new images based on this.  
 
 The version numbers are of format `<alpine version>-<s6 version>`. 
+
+[DockerHub repo](https://hub.docker.com/repository/docker/rakheshster/alpine-s6)
