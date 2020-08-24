@@ -2,19 +2,28 @@
 
 # This script downloads s6-overlay and extracts it into the root folder. The version and architecture as specified as arguments. This is meant to be invoked from my Dockerfile via docker buildx. 
 # The $TARGETARCH variable contains the architecture. However, this is normalized as per https://github.com/containerd/containerd/blob/master/platforms/platforms.go#L80 and does not match what s6 expects so I map that to the ARCH variable. 
+# The $TARGETVARIANT variable contains the variant of the architecture. This is only useful in the ARM case currently. 
 S6_VERSION=$1
 TARGETARCH=$2
+TARGETVARIANT=$3
 
 case ${TARGETARCH} in
-    arm|arm/v7)
-        ARCH="armhf"
+    arm) \
+    	case ${TARGETVARIANT} in
+            v6)
+                ARCH="arm"
+                ;;
+            v7)
+                ARCH="armhf"
+                ;;
+            v8)
+                ARCH="aarch64"
+                ;;
+        esac
         ;;
-    arm/v6)
-        ARCH="arm"
-        ;;
-    arm64|arm/v8)
-        ARCH="aarch64"
-        ;;
+    arm64)
+	ARCH="aarch64"
+	;;
     386)
         ARCH="x86"
         ;;
