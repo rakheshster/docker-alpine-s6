@@ -1,6 +1,12 @@
 #!/bin/bash
+# Usage ./buildandpush.sh
 
-ALPINE_VERSION=3.12
-S6_VERSION=2.0.0.1
+BUILDINFO="$(pwd)/buildinfo.json"
+if ! [[ -r "$BUILDINFO" ]]; then echo "Cannot find $BUILDINFO file. Exiting ..."; exit 1; fi
 
-docker buildx build --platform linux/amd64,linux/arm64,linux/386,linux/arm/v7,linux/arm/v6 . --push -t rakheshster/alpine-s6:${ALPINE_VERSION}-${S6_VERSION} --progress=plain
+if ! command -v jq &> /dev/null; then echo "Cannot find jq. Exiting ..."; exit 1; fi
+
+VERSION=$(jq -r '.version' $BUILDINFO)
+IMAGENAME=$(jq -r '.imagename' $BUILDINFO)
+
+docker buildx build --platform linux/amd64,linux/arm64,linux/386,linux/arm/v7,linux/arm/v6 . --push -t ${IMAGENAME}:${VERSION} --progress=plain
