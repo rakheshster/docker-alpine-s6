@@ -22,7 +22,7 @@ RUN rm -f /tmp/gets6.sh
 RUN rm -rf /root/.gnupg
 # I have to remove this stuff lest it gets copied over in the next stage (as I am copying from /)
 RUN apk -q --no-cache del gnupg
-RUN RUN rm -rf /var/cache/apk/*
+RUN rm -rf /var/cache/apk/*
 
 ################################### STAGE TWO ####################################
 # Doing a new build just so I can get rid of that /tmp/gets6.sh from any of the layers coz of my OCD ...
