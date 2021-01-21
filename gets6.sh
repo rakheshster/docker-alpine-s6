@@ -22,7 +22,7 @@ case ${TARGETARCH} in
         esac
         ;;
     arm64)
-	ARCH="aarch64"
+	    ARCH="aarch64"
 	;;
     386)
         ARCH="x86"
