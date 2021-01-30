@@ -29,6 +29,9 @@ RUN rm -rf /var/cache/apk/*
 ARG ALPINE_VERSION=3.13
 FROM --platform=$TARGETPLATFORM alpine:${ALPINE_VERSION} 
 
+LABEL maintainer="Rakhesh Sasidharan"
+LABEL org.opencontainers.image.source=https://github.com/rakheshster/docker-debian-s6
+
 RUN rm -f /var/run 
 COPY --from=alpinebuild / /
 
