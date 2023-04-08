@@ -1,4 +1,4 @@
 {
-	"imagename": "rakheshster/alpine-s6",
+	"imagename": "gmarcy/alpine-s6",
 	"version": "3.13-2.2.0.3"
 }
